@@ -30,10 +30,14 @@ namespace DatingApp.API
         {
             //Bu method dependency injection container olarak kullaniliyor
             // Uygulamanin herhangi bir yerinde kullanilmasini istedigimiz seyleri burada service olarak ekliyoruz
-
+            // Buradaki siralama onemli degil.
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddCors();
+            // services.AddSingleton<IAuthRepository, AuthRepository>(); Bir service in instance ini bir kere olusturup onu tekrar tekrar kullaniyor. Bunu kullanmak async service ler icin (concurrent request icin) uygun degil.
+            // services.AddTransient<IAuthRepository, AuthRepository>(); Lightweight stateless services icin kullaniliyor. Her request geldiginde tekrar tekrar kullaniliyor.
+            services.AddScoped<IAuthRepository, AuthRepository>(); //Bu service scope dahilinde tekrar tekrar kullaniliyor. Ayni instance icinde tekrar tekrar kullaniliyor
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +45,7 @@ namespace DatingApp.API
         {
             //Bir API a request yapilinca request, HTTP request pipeline dan geciyor. Configure method ile bu pipeline configure ediliyor.
             //Burasi bir middleware olarak calisiyor. Yani pipeline a gitmeden once buraya ugruyor
+            //Configure method undaki configuration siralamasi onemli. 
             if (env.IsDevelopment())
             {
                 //Asagidaki mesaj sayesinde development ta isek developer lar icin exception gosteriyor

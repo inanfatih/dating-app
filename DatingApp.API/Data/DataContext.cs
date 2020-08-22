@@ -12,6 +12,7 @@ namespace DatingApp.API.Data
         //DataContext e Models klasorundeki Value veriliyor
         //Asagidaki Values, tablo adi olacak
         public DbSet<Value> Values { get; set; }
+        public DbSet<User> Users { get; set; }
 
     }
 }
