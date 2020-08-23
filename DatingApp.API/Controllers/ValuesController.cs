@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DatingApp.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API.Controllers
 {
+
+    [Authorize]
     //Buradaki [controller] bir placeholder. yani localhost:5000/api/values seklinde kullaniliyor
     [Route("api/[controller]")] // Buna attribute based routing deniyormus 
-    [ApiController]
+    [ApiController] //Bununla yukaridaki gibi attribute based routing mecbur kilinmis oluyor
+
+    //ControllerBase, http responses a ulasim veriyor. Bunu Controller olarak kullanirsan, MVC olarak kullanabilirsin.
     public class ValuesController : ControllerBase
     {
         private readonly DataContext _context;
@@ -37,6 +42,7 @@ namespace DatingApp.API.Controllers
         }
 
         // GET api/values/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
