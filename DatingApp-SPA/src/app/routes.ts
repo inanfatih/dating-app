@@ -16,22 +16,22 @@ export const appRoutes: Routes = [
   {
     path: '', // buraya "semih" ekleseydim, children larin basina otomatik olarak semih eklerdi ve semihmembers olurdu mesela
     runGuardsAndResolvers: 'always',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Bunun sayesinde loginsiz olarak bu sayfalara girisi engelliyoruz
     children: [
       {
         path: 'members',
         component: MemberListComponent,
-        resolve: { users: MemberListResolver },
+        resolve: { users: MemberListResolver }, // Bu resolver sayesinde datayi o component a gitmeden once cekmis oluyoruz
       },
       {
         path: 'members/:id',
         component: MemberDetailComponent,
-        resolve: { user: MemberDetailResolver },
+        resolve: { user: MemberDetailResolver }, // Bu resolver sayesinde datayi o component a gitmeden once cekmis oluyoruz
       },
       {
         path: 'member/edit',
         component: MemberEditComponent,
-        resolve: { user: MemberEditResolver },
+        resolve: { user: MemberEditResolver }, // Bu resolver sayesinde datayi o component a gitmeden once cekmis oluyoruz
         canDeactivate: [PreventUnsavedChanges],
       },
       { path: 'messages', component: MessagesComponent },
