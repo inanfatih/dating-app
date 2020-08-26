@@ -54,6 +54,7 @@ namespace DatingApp.API
             // services.AddTransient<IAuthRepository, AuthRepository>(); Lightweight stateless services icin kullaniliyor. Her request geldiginde tekrar tekrar kullaniliyor.
             services.AddScoped<IAuthRepository, AuthRepository>(); //Bu service scope dahilinde tekrar tekrar kullaniliyor. Ayni instance icinde tekrar tekrar kullaniliyor
             services.AddScoped<IDatingRepository, DatingRepository>();
+            services.AddScoped<LogUserActivity>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(OptionsBuilderConfigurationExtensions =>
             {
                 OptionsBuilderConfigurationExtensions.TokenValidationParameters = new TokenValidationParameters
