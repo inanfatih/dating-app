@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AppComponent } from './app.component';
@@ -26,22 +27,13 @@ import { NgxGalleryModule } from 'ngx-gallery-9';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolver/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 
 // Asagidaki method ile siteye token'i manuel olarak eklemek gerekmeyecek.
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
-// export class CustomHammerConfig extends HammerGestureConfig {
-//   overrides = {
-//     pinch: {
-//       enable: false,
-//     },
-//     rotate: {
-//       enable: false,
-//     },
-//   };
-// }
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +46,7 @@ export function tokenGetter() {
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
+    PhotoEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +57,7 @@ export function tokenGetter() {
     TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     NgxGalleryModule,
+    FileUploadModule,
     JwtModule.forRoot({
       config: {
         // tslint:disable-next-line: object-literal-shorthand

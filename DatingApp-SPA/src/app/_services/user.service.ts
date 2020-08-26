@@ -8,20 +8,31 @@ import { User } from '../_models/user';
   providedIn: 'root',
 })
 export class UserService {
-  baseURl = environment.apiUrl;
+  baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
     // asagidaki get normalde Observable<Object> donuyor. Bunu Observable<User[]> a donusturmek icin get'ten sonra <User[]> ekledik
-    return this.http.get<User[]>(this.baseURl + 'users');
+    return this.http.get<User[]>(this.baseUrl + 'users');
   }
 
   getUser(id): Observable<User> {
-    return this.http.get<User>(this.baseURl + 'users/' + id);
+    return this.http.get<User>(this.baseUrl + 'users/' + id);
   }
 
   updateUser(id: number, user: User) {
-    return this.http.put(this.baseURl + 'users/' + id, user);
+    return this.http.put(this.baseUrl + 'users/' + id, user);
+  }
+
+  setMainPhoto(userId: number, id: number) {
+    return this.http.post(
+      this.baseUrl + 'users/' + userId + '/photos/' + id + '/setMain',
+      {}
+    );
+  }
+
+  deletePhoto(userId: number, id: number) {
+    return this.http.delete(this.baseUrl + 'users/' + userId + '/photos/' + id);
   }
 }

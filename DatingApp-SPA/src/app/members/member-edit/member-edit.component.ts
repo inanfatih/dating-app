@@ -21,6 +21,8 @@ export class MemberEditComponent implements OnInit {
     }
   }
 
+  photoUrl: string;
+
   constructor(
     private route: ActivatedRoute,
     private alertify: AlertifyService,
@@ -32,6 +34,9 @@ export class MemberEditComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.user = data['user'];
     });
+    this.authService.currentPhotUrl.subscribe(
+      (photoUrl) => (this.photoUrl = photoUrl)
+    );
   }
 
   updateUser() {
@@ -46,5 +51,9 @@ export class MemberEditComponent implements OnInit {
           this.alertify.error(error);
         }
       );
+  }
+
+  updateMainPhoto(photoUrl: string) {
+    this.user.photoUrl = photoUrl;
   }
 }

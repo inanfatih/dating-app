@@ -46,7 +46,8 @@ namespace DatingApp.API
             });
 
             services.AddCors();
-
+            // Asagidaki kod ile CloudinarySettings helper class indaki data ile appsettings teki datayi match ediyor
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(DatingRepository).Assembly);
 
             // services.AddSingleton<IAuthRepository, AuthRepository>(); Bir service in instance ini bir kere olusturup onu tekrar tekrar kullaniyor. Bunu kullanmak async service ler icin (concurrent request icin) uygun degil.
@@ -99,7 +100,7 @@ namespace DatingApp.API
             // app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            // Asagida ".AllowCredentials" da olsaydi, o durumda cookies'den gelecek credentials i da kullaniyor olurdu. Fakat biz cookies ile islem yapmiyoruz sistemde
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthentication();
