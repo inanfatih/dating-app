@@ -32,6 +32,8 @@ import { MemberEditResolver } from './_resolver/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { ListsResolver } from './_resolver/lists.resolver';
+import { MessagesResolver } from './_resolver/messages.resolver';
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 
 // Asagidaki method ile siteye token'i manuel olarak eklemek gerekmeyecek.
 export function tokenGetter() {
@@ -51,6 +53,7 @@ export function tokenGetter() {
     MemberDetailComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    MemberMessagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +86,7 @@ export function tokenGetter() {
     MemberEditResolver,
     PreventUnsavedChanges,
     ListsResolver,
+    MessagesResolver,
   ],
 
   bootstrap: [AppComponent],
