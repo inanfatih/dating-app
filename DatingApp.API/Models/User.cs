@@ -19,6 +19,9 @@ namespace DatingApp.API.Models
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        // Photo ve Like tablolari User tablosuna bagli olduklari icin bu sekilde User modeline ICollection eklememiz gerekiyor
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<Like> Likers { get; set; }
+        public ICollection<Like> Likees { get; set; }
     }
 }
